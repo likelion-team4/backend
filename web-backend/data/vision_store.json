@@ -1,0 +1,82 @@
+[
+  {
+    "name": "김밥마을",
+    "address": "대구광역시 북구 대현로 9길 49",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "053-959-0717"
+  },
+  {
+    "name": "반짝반짝빛나는",
+    "address": "대구광역시 북구 대학로23길 12-1",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "053-954-8111"
+  },
+  {
+    "name": "테이크어바이트",
+    "address": "대구광역시 북구 대학로23길 30 2층",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "070-7551-7238"
+  },
+  {
+    "name": "수봉반점",
+    "address": "대구광역시 북구 대현남로2길 60",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "053-941-1503"
+  },
+  {
+    "name": "두덮",
+    "address": "대구광역시 북구 대학로23길 30-1 1층 두덮",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": ""
+  },
+  {
+    "name": "가향미마라탕",
+    "address": "대구광역시 북구 대학로23길 34 (산격동) 2층",
+    "district": "",
+    "lat": null,
+    "lon": null,
+    "phone": "0507-1423-9855"
+  },
+  {
+    "name": "찬이네",
+    "address": "대구광역시 북구 대현남로 28 (대현뜨란채) 가동 106호 찬이네",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "053-939-0880"
+  },
+  {
+    "name": "스톡홀름 샐러드",
+    "address": "대구광역시 북구 대현로 19길 80 1층 상가",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "010-7659-3138"
+  },
+  {
+    "name": "주비 두루 향기롭다",
+    "address": "대구광역시 북구 대학로15길 17-1",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "053-954-0566"
+  },
+  {
+    "name": "오프더커프",
+    "address": "대구광역시 북구 대학로17길 12-1 1층",
+    "district": "대구광역시 북구",
+    "lat": null,
+    "lon": null,
+    "phone": "010-4123-2922"
+  }
+]
