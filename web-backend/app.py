@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from sqlalchemy import create_engine
+from sqlalchemy import text
 from sqlalchemy.orm import sessionmaker, joinedload
 from contextlib import contextmanager
 import os
@@ -21,7 +22,7 @@ engine = create_engine(f"sqlite:///{os.path.abspath(DB_PATH)}")
 Session = sessionmaker(bind=engine)
 
 # AI 서버 설정
-AI_SERVER_URL = "http://localhost:5001/ai/generate_stores"
+AI_SERVER_URL = "http://43.201.148.58:5001/ai/generate_stores"
 
 # 카카오 API 키 불러오기
 KAKAO_API_KEY = os.environ.get("KAKAO_API_KEY")
@@ -322,9 +323,53 @@ def get_cardnews():
             for card in cards
         ]
         return jsonify(result)
+    
+# 반경 N km 내 가게 불러오기 (안전 강화 버전)
+@app.route("/stores/nearby")
+def get_nearby_stores():
+    try:
+        # 입력 값 가져오기
+        lat_str = request.args.get("lat")
+        lon_str = request.args.get("lon")
+        radius_str = request.args.get("radius", "2")
+
+        # 필수 값 체크
+        if lat_str is None or lon_str is None:
+            return jsonify({"error": "lat, lon 파라미터 필요"}), 400
+
+        # float 변환
+        try:
+            lat = float(lat_str)
+            lon = float(lon_str)
+            radius = float(radius_str)
+        except ValueError:
+            return jsonify({"error": "lat, lon, radius는 숫자여야 합니다"}), 400
+
+        # SQL 실행
+        query = text("""
+            SELECT id, name, lat, lon,
+                   (6371 * acos(
+                       cos(radians(:lat)) * cos(radians(lat)) *
+                       cos(radians(lon) - radians(:lon)) +
+                       sin(radians(:lat)) * sin(radians(lat))
+                   )) AS distance
+            FROM store
+            HAVING distance < :radius
+            ORDER BY distance
+        """)
+
+        with Session() as session:
+            result = session.execute(query, {"lat": lat, "lon": lon, "radius": radius})
+            stores = [dict(row._mapping) for row in result]
+
+        return jsonify(stores)
+
+    except Exception as e:
+        # 여기서 query_str 관련 에러가 나더라도 잡힘
+        return jsonify({"error": str(e)}), 500
 
 # 서버 시작
 if __name__ == '__main__':
     load_data.main()          # 초기 CSV/JSON 로딩
     fetch_and_store_ai_data() # AI 서버에서 데이터 가져와 DB 저장
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
