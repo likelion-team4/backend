@@ -22,7 +22,7 @@ engine = create_engine(f"sqlite:///{os.path.abspath(DB_PATH)}")
 Session = sessionmaker(bind=engine)
 
 # AI 서버 설정
-AI_SERVER_URL = "http://43.201.148.58:5001/ai/generate_stores"
+AI_SERVER_URL = "http://localhost:5001/ai/generate_stores"
 
 # 카카오 API 키 불러오기
 KAKAO_API_KEY = os.environ.get("KAKAO_API_KEY")
