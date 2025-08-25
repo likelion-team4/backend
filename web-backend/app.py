@@ -1,5 +1,6 @@
 # Flask 웹 서버
 from flask import Flask, jsonify, request, abort
+from flask_cors import CORS
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, joinedload
 from contextlib import contextmanager
@@ -11,6 +12,7 @@ import load_data  # CSV/JSON 초기 데이터 로딩
 from models import Base, Store, Certification, CertificationType, Category, CardNews
 
 app = Flask(__name__)
+CORS(app)
 
 # DB 세팅
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
